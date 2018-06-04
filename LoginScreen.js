@@ -1,11 +1,20 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, Button } from "react-native";
+import * as Server from "./server";
 
 class LoginScreen extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    userTypes: []
   };
+
+  componentDidMount() {
+    Server.userTypes_getAll().then(response => {
+      const userTypes = response.data.items;
+      this.setState({ userTypes });
+    });
+  }
 
   render() {
     return (
@@ -19,7 +28,7 @@ class LoginScreen extends Component {
         }}
       >
         <View style={{ height: 120, backgroundColor: "yellowgreen" }}>
-          MEMBER AREA
+          <Text>MEMBER AREA</Text>
         </View>
         <View
           style={{
@@ -39,6 +48,12 @@ class LoginScreen extends Component {
             onChangeText={text => this.setState({ text })}
             value={this.state.password}
           />
+          <Button
+            title="Submit"
+            color="dodgerblue"
+            onPress={() => this.buttonWasClicked}
+          />
+          {this.state.userTypes && this.state.userTypes.map(c => <Text key={c.userTypeId}>{c.name}</Text>)}
         </View>
         <View style={{ height: 120, backgroundColor: "white" }}>
           {" "}
