@@ -2,7 +2,7 @@ import * as axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-const URL_PREFIX = "http://192.168.1.129:3024";
+const URL_PREFIX = "https://recruithub.azurewebsites.net";
 
 export function users_LogIn(data) {
   return axios.post(URL_PREFIX + "/api/users/login", data);

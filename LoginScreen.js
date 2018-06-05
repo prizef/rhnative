@@ -6,15 +6,29 @@ class LoginScreen extends Component {
   state = {
     email: "",
     password: "",
-    userTypes: []
+    loginSuccess: ""
   };
 
-  componentDidMount() {
-    Server.userTypes_getAll().then(response => {
-      const userTypes = response.data.items;
-      this.setState({ userTypes });
-    });
-  }
+  buttonWasClicked = () => {
+    Server.users_LogIn({
+      email: this.state.email,
+      password: this.state.password
+    })
+      .then(response => {
+        this.setState({
+          email: "",
+          password: "",
+          loginSuccess: "Logged in!"
+        });
+      })
+      .catch(error => {
+        this.setState({
+          email: "",
+          password: "",
+          loginSuccess: "Logged in failed!!!"
+        });
+      });
+  };
 
   render() {
     return (
@@ -32,7 +46,7 @@ class LoginScreen extends Component {
         </View>
         <View
           style={{
-            height: 170,
+            height: 200,
             flexDirection: "column",
             justifyContent: "center",
             backgroundColor: "silver"
@@ -40,24 +54,25 @@ class LoginScreen extends Component {
         >
           <TextInput
             style={{ height: 50, borderColor: "black", borderWidth: 1 }}
-            onChangeText={text => this.setState({ text })}
+            placeholder="Email"
+            onChangeText={email => this.setState({ email })}
             value={this.state.email}
           />
+          <Text>{"\n"}</Text>
           <TextInput
             style={{ height: 50, borderColor: "black", borderWidth: 1 }}
-            onChangeText={text => this.setState({ text })}
+            placeholder="Password"
+            onChangeText={password => this.setState({ password })}
             value={this.state.password}
           />
           <Button
-            title="Submit"
+            title="Login"
             color="dodgerblue"
             onPress={() => this.buttonWasClicked}
           />
-          {this.state.userTypes && this.state.userTypes.map(c => <Text key={c.userTypeId}>{c.name}</Text>)}
         </View>
         <View style={{ height: 120, backgroundColor: "white" }}>
-          {" "}
-          MEMBER AREA
+          <Text>{this.state.loginSuccess && this.state.loginSuccess}</Text>
         </View>
       </View>
     );
