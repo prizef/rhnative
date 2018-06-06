@@ -9,7 +9,8 @@ class LoginScreen extends Component {
     loginSuccess: ""
   };
 
-  buttonWasClicked = () => {
+  handleClick = () => {
+    console.log('hello');
     Server.users_LogIn({
       email: this.state.email,
       password: this.state.password
@@ -19,13 +20,14 @@ class LoginScreen extends Component {
           email: "",
           password: "",
           loginSuccess: "Logged in!"
-        });
+        }),
+        this.props.navigation.navigate("ProfileScreen");
       })
       .catch(error => {
         this.setState({
           email: "",
           password: "",
-          loginSuccess: "Logged in failed!!!"
+          loginSuccess: "Log in failed!!!"
         });
       });
   };
@@ -68,7 +70,7 @@ class LoginScreen extends Component {
           <Button
             title="Login"
             color="dodgerblue"
-            onPress={() => this.buttonWasClicked}
+            onPress={this.handleClick}
           />
         </View>
         <View style={{ height: 120, backgroundColor: "white" }}>
