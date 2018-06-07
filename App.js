@@ -18,5 +18,5 @@ const AppNavigator = createStackNavigator({
   HomeScreen: { screen: HomeScreen },
   LoginScreen: { screen: LoginScreen },
   RegisterScreen: { screen: RegisterScreen },
-  Profile: { screen: ProfileScreen }
+  ProfileScreen: { screen: ProfileScreen }
 });

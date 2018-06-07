@@ -21,7 +21,7 @@ class LoginScreen extends Component {
           password: "",
           loginSuccess: "Logged in!"
         }),
-        this.props.navigation.navigate("ProfileScreen");
+        this.props.navigation.navigate('ProfileScreen');
       })
       .catch(error => {
         this.setState({
@@ -29,6 +29,7 @@ class LoginScreen extends Component {
           password: "",
           loginSuccess: "Log in failed!!!"
         });
+        this.props.navigator.push("ProfileScreen");
       });
   };
 
