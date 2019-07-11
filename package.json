@@ -27,7 +27,7 @@
     "merge": "^1.2.1",
     "primereact": "^1.6.0-rc.1",
     "react": "16.3.1",
-    "react-native": "^0.59.9",
+    "react-native": "^0.60.0",
     "react-navigation": "^2.0.4",
     "ws": "^3.3.3"
   }
